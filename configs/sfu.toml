@@ -1,0 +1,27 @@
+[global]
+pprof = ":6062"
+
+# server
+dc = "shenzhen"
+name = "sfu"
+nid = "shenzhen_sfu_1"
+
+[etcd]
+addrs = ["127.0.0.1:2379"]
+
+[nats]
+url = "127.0.0.1:4222"
+
+[webrtc]
+# Range of ports
+# Format: [min, max]   and max - min >= 100
+# portrange = [50000, 60000]
+
+# if sfu behind nat, set iceserver
+[[webrtc.iceserver]]
+urls = ["stun:120.238.78.214:3478"]
+
+[[webrtc.iceserver]]
+# urls = ["turn:120.238.78.214:3478"]
+# username = "demo"
+# credential = "123456"
