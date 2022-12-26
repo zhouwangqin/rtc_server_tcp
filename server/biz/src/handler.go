@@ -55,7 +55,7 @@ func join(peer *Peer, msg map[string]interface{}, accept AcceptFunc, reject Reje
 		return
 	}
 
-	uid := util.Val(msg, "rid")
+	uid := util.Val(msg, "uid")
 	rid := util.Val(msg, "rid")
 	peer.id = uid
 

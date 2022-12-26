@@ -286,7 +286,7 @@ func CheckRoom() {
 					}
 					// 删除本地对象
 					room.DelPeer(uid)
-					logger.Debugf("room=%s del peer uid=%", rid, uid)
+					logger.Debugf("room=%s del peer uid=%s", rid, uid)
 				}
 			}
 			if len(room.GetPeers()) == 0 {

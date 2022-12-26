@@ -51,7 +51,7 @@ func (tcp *TcpSocket) DoRead(msg chan []byte, stop chan int) {
 		byLen := make([]byte, 2)
 		recvLen, err := tcp.conn.Read(byLen)
 		if (err != nil) || (recvLen != 2) {
-			fmt.Printf("tcp recv len error = %v", err)
+			fmt.Printf("tcp recv len error = %v\n", err)
 			close(stop)
 			// exit
 			if !tcp.close {
@@ -63,7 +63,7 @@ func (tcp *TcpSocket) DoRead(msg chan []byte, stop chan int) {
 		// calc json data len
 		nLen := uint32(byLen[0])
 		nLen += (uint32(byLen[1]) << 8)
-		fmt.Printf("tcp recv len = %d", nLen)
+		fmt.Printf("tcp recv len = %d\n", nLen)
 
 		if nLen > 4096 {
 			close(stop)
@@ -91,7 +91,7 @@ func (tcp *TcpSocket) DoRead(msg chan []byte, stop chan int) {
 			nIndex += recvLen
 		}
 
-		fmt.Printf("tcp recv data = %s", string(byData))
+		fmt.Printf("tcp recv data = %s\n", string(byData))
 		msg <- byData
 	}
 }
@@ -109,6 +109,8 @@ func (tcp *TcpSocket) Send(msg string) error {
 	byData[0] = byte(nLen)
 	byData[1] = byte(nLen >> 8)
 	copy(byData[2:], []byte(msg))
+	fmt.Printf("tcp send data = %s\n", msg)
+
 	_, err := tcp.conn.Write(byData)
 	if err != nil {
 		return errors.New("tcp write fail")

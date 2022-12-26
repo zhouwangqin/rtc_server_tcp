@@ -79,7 +79,7 @@ func (peer *Peer) Notify(method string, data map[string]interface{}) {
 		return
 	}
 
-	fmt.Printf("Send notification [%s]", method)
+	fmt.Printf("Send notification [%s]\n", method)
 	peer.tcp.Send(string(str))
 }
 
@@ -114,7 +114,6 @@ func (peer *Peer) handleRequest(request map[string]interface{}) {
 			return
 		}
 
-		fmt.Printf("Accept [%s] => (%s)", request["method"], str)
 		peer.tcp.Send(string(str))
 	}
 
@@ -132,7 +131,6 @@ func (peer *Peer) handleRequest(request map[string]interface{}) {
 			return
 		}
 
-		fmt.Printf("Reject [%s] => (errorCode:%d, errorReason:%s)", request["method"], errorCode, errorReason)
 		peer.tcp.Send(string(str))
 	}
 
